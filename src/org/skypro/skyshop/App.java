@@ -44,7 +44,6 @@ public class App {
         System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
 
         System.out.println(Arrays.toString(searchEngine.search("Ст")));
-
     }
 }
 

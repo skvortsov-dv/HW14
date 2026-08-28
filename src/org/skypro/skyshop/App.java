@@ -44,6 +44,46 @@ public class App {
         System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
 
         System.out.println(Arrays.toString(searchEngine.search("Ст")));
+
+        try {
+            Product simpleProduct1 = new SimpleProduct("", 50);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Product simpleProduct2 = new SimpleProduct("Лампа", -150);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Product discountedProduct1 = new DiscountedProduct("", 70, 25);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Product discountedProduct2 = new DiscountedProduct("Свечи", -200, 20);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Product discountedProduct3 = new DiscountedProduct("Цветы", 100, -10);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Product fixPriceProduct1 = new FixPriceProduct("");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            System.out.println(searchEngine.getSearchTerm("о"));
+            System.out.println(searchEngine.getSearchTerm("ааааа"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
+
+
 

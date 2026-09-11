@@ -71,6 +71,11 @@ public class App {
             System.out.println(e.getMessage());
         }
         try {
+            Product discountedProduct4 = new DiscountedProduct("Мебель", 10000, 101);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             Product fixPriceProduct1 = new FixPriceProduct("");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

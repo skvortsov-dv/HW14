@@ -12,7 +12,7 @@ public class App {
         Product product1 = new SimpleProduct("Стол", 2000);
         Product product2 = new SimpleProduct("Стул", 1000);
         Product product3 = new DiscountedProduct("Хлеб", 50, 20);
-        Product product4 = new DiscountedProduct("Молоко", 100, -50);
+        Product product4 = new DiscountedProduct("Молоко", 100, 0);
         Product product5 = new FixPriceProduct("Лицензия");
 
 
@@ -71,6 +71,11 @@ public class App {
             System.out.println(e.getMessage());
         }
         try {
+            Product discountedProduct4 = new DiscountedProduct("Мебель", 10000, 101);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             Product fixPriceProduct1 = new FixPriceProduct("");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -78,6 +83,10 @@ public class App {
 
         try {
             System.out.println(searchEngine.getSearchTerm("о"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             System.out.println(searchEngine.getSearchTerm("ааааа"));
         } catch (BestResultNotFound e) {
             System.out.println(e.getMessage());

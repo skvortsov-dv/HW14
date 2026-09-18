@@ -4,6 +4,7 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -91,6 +92,29 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println(e.getMessage());
         }
+
+        ProductBasket productBasket2 = new ProductBasket();
+
+        productBasket2.add(product1);
+        productBasket2.add(product2);
+        productBasket2.add(product3);
+        productBasket2.add(product4);
+        productBasket2.add(product5);
+        productBasket2.add(product1);
+
+        List<Product> deleted = productBasket2.remove("Стол");
+
+        for (Product product : deleted) {
+            System.out.println(product);
+        }
+
+        productBasket2.print();
+
+        if (productBasket2.remove("Смартфон").isEmpty()) {
+            System.out.println("Список пуст");
+        }
+
+        productBasket2.print();
     }
 }
 

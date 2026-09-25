@@ -5,6 +5,7 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ProductBasket {
@@ -79,14 +80,17 @@ public class ProductBasket {
     public List<Product> remove(String name) {
         List <Product> deleted = new ArrayList<>();
 
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getName().equals(name)) {
-                deleted.add(products.get(i));
-                products.remove(i);
+        Iterator<Product> iterator = deleted.iterator();
+
+        while (iterator.hasNext()){
+            Product item = iterator.next();
+
+            if (item.getName().equals(name)) {
+                deleted.add(item);
+                iterator.remove();
             }
         }
 
         return deleted;
-
     }
 }

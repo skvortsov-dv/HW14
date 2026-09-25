@@ -34,7 +34,7 @@ public class App {
         System.out.println(productBasket.sum());
         System.out.println(productBasket.contains("Шкаф"));
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
 
         searchEngine.add(product1);
         searchEngine.add(product2);
@@ -42,9 +42,9 @@ public class App {
         searchEngine.add(product4);
         searchEngine.add(product5);
 
-        System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
+        System.out.println(searchEngine.search("Хлеб"));
 
-        System.out.println(Arrays.toString(searchEngine.search("Ст")));
+        System.out.println(searchEngine.search("Ст"));
 
         try {
             Product simpleProduct1 = new SimpleProduct("", 50);

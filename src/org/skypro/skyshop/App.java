@@ -4,6 +4,7 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class App {
         Product product1 = new SimpleProduct("Стол", 2000);
         Product product2 = new SimpleProduct("Стул", 1000);
         Product product3 = new DiscountedProduct("Хлеб", 50, 20);
-        Product product4 = new DiscountedProduct("Молоко", 100, -50);
+        Product product4 = new DiscountedProduct("Молоко", 100, 0);
         Product product5 = new FixPriceProduct("Лицензия");
 
 
@@ -33,7 +34,7 @@ public class App {
         System.out.println(productBasket.sum());
         System.out.println(productBasket.contains("Шкаф"));
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
 
         searchEngine.add(product1);
         searchEngine.add(product2);
@@ -41,9 +42,9 @@ public class App {
         searchEngine.add(product4);
         searchEngine.add(product5);
 
-        System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
+        System.out.println(searchEngine.search("Хлеб"));
 
-        System.out.println(Arrays.toString(searchEngine.search("Ст")));
+        System.out.println(searchEngine.search("Ст"));
 
         try {
             Product simpleProduct1 = new SimpleProduct("", 50);
@@ -71,6 +72,11 @@ public class App {
             System.out.println(e.getMessage());
         }
         try {
+            Product discountedProduct4 = new DiscountedProduct("Мебель", 10000, 101);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             Product fixPriceProduct1 = new FixPriceProduct("");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -78,10 +84,37 @@ public class App {
 
         try {
             System.out.println(searchEngine.getSearchTerm("о"));
+        } catch (BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             System.out.println(searchEngine.getSearchTerm("ааааа"));
         } catch (BestResultNotFound e) {
             System.out.println(e.getMessage());
         }
+
+        ProductBasket productBasket2 = new ProductBasket();
+
+        productBasket2.add(product1);
+        productBasket2.add(product2);
+        productBasket2.add(product3);
+        productBasket2.add(product4);
+        productBasket2.add(product5);
+        productBasket2.add(product1);
+
+        List<Product> deleted = productBasket2.remove("Стол");
+
+        for (Product product : deleted) {
+            System.out.println(product);
+        }
+
+        productBasket2.print();
+
+        if (productBasket2.remove("Смартфон").isEmpty()) {
+            System.out.println("Список пуст");
+        }
+
+        productBasket2.print();
     }
 }
 

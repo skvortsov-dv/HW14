@@ -4,21 +4,24 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
-    private List<Product> products;
+    private Map<String, List<Product>> products;
 //    private int index;
 
     public ProductBasket() {
-        this.products = new ArrayList<>();
+        this.products = new HashMap<>();
+
 //        this.index = 0;
     }
 
     public void add(Product product) {
-        products.add(product);
+        if (!products.containsKey(product.getName())){
+            products.put(product.getName(), new ArrayList<>());
+        }
+
+        products.get(product.getName()).add(product);
     }
 
     public int sum() {
@@ -27,8 +30,10 @@ public class ProductBasket {
 //        for (int i = 0; i < index; i++) {
 //            sum += products[i].getPrice();
 //        }
-        for (Product product : products) {
-            sum += product.getPrice();
+        for (List<Product> list : products.values()) {
+            for (Product product : list) {
+                sum += product.getPrice();
+            }
         }
 
         return sum;
@@ -44,12 +49,22 @@ public class ProductBasket {
 //                }
 //                System.out.println(products[i]);
 //            }
-            for (Product product : products) {
-                if (product.isSpecial()) {
-                    special += 1;
+
+            for (List<Product> list : products.values()) {
+                for (Product product : list) {
+                    if (product.isSpecial()) {
+                        special += 1;
+                    }
+                    System.out.println(product);
                 }
-                System.out.println(product);
             }
+
+//            for (Product product : products) {
+//                if (product.isSpecial()) {
+//                    special += 1;
+//                }
+//                System.out.println(product);
+//            }
 
             System.out.println("Итого: " + sum());
             System.out.println("Специальных товаров: " + special);
@@ -64,11 +79,19 @@ public class ProductBasket {
 //                return true;
 //            }
 //        }
-        for (Product product: products) {
-            if (product.getName().equals(name)) {
-                return true;
+
+        for (List<Product> list : products.values()) {
+            for (Product product : list) {
+                if (product.getName().equals(name)) {
+                    return true;
+                }
             }
         }
+//        for (Product product: products) {
+//            if (product.getName().equals(name)) {
+//                return true;
+//            }
+//        }
 
         return false;
     }

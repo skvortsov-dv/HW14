@@ -103,16 +103,18 @@ public class ProductBasket {
     public List<Product> remove(String name) {
         List <Product> deleted = new ArrayList<>();
 
-        Iterator<Product> iterator = products.iterator();
+        products.remove(name);
 
-        while (iterator.hasNext()){
-            Product item = iterator.next();
-
-            if (item.getName().equals(name)) {
-                deleted.add(item);
-                iterator.remove();
-            }
-        }
+//        Iterator<Product> iterator = products.iterator();
+//
+//        while (iterator.hasNext()){
+//            Product item = iterator.next();
+//
+//            if (item.getName().equals(name)) {
+//                deleted.add(item);
+//                iterator.remove();
+//            }
+//        }
 
         return deleted;
     }

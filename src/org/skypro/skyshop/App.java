@@ -43,13 +43,13 @@ public class App {
         searchEngine.add(product5);
 
 
-        for(Searchable searchable : searchEngine.search("Хлеб").values()) {
+        for(Searchable searchable : searchEngine.search("Хлеб")) {
             System.out.println(searchable);
         }
 
 //        System.out.println(searchEngine.search("Хлеб"));
 
-        for(Searchable searchable : searchEngine.search("Ст").values()) {
+        for(Searchable searchable : searchEngine.search("Ст")) {
             System.out.println(searchable);
         }
 

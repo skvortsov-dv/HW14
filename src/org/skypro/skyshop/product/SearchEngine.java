@@ -19,7 +19,7 @@ public class SearchEngine {
     public Set<Searchable> search (String string) {
 //        Searchable[] answer = new Searchable[5];
 //        List<Searchable> answer = new ArrayList<>();
-        Set<Searchable> answer = new TreeSet<>();
+        Set<Searchable> answer = new TreeSet<>(new SearchableComparator());
 
 //        for (int i = 0, c = 0; i < index && c < 5; i++) {
         for (Searchable searchable : searchables) {

@@ -3,11 +3,11 @@ package org.skypro.skyshop.product;
 import java.util.*;
 
 public class SearchEngine {
-    private List<Searchable> searchables;
+    private Set<Searchable> searchables;
 //    private int index;
 
     public SearchEngine() {
-        this.searchables = new ArrayList<>();
+        this.searchables = new HashSet<>();
 //        this.index = 0;
     }
 
@@ -16,10 +16,10 @@ public class SearchEngine {
         searchables.add(searchable);
     }
 
-    public Map<String, Searchable> search (String string) {
+    public Set<Searchable> search (String string) {
 //        Searchable[] answer = new Searchable[5];
 //        List<Searchable> answer = new ArrayList<>();
-        Map<String, Searchable> answer = new TreeMap<>();
+        Set<Searchable> answer = new TreeSet<>();
 
 //        for (int i = 0, c = 0; i < index && c < 5; i++) {
         for (Searchable searchable : searchables) {
@@ -31,7 +31,7 @@ public class SearchEngine {
 
 //                answer.get(searchable.getName()).add(searchable);
 
-                answer.put(searchable.getName(), searchable);
+                answer.add(searchable);
             }
         }
 

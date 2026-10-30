@@ -27,18 +27,20 @@ public class ProductBasket {
     }
 
     public int sum() {
-        int sum = 0;
-
-//        for (int i = 0; i < index; i++) {
-//            sum += products[i].getPrice();
+//        int sum = 0;
+//
+////        for (int i = 0; i < index; i++) {
+////            sum += products[i].getPrice();
+////        }
+//        for (List<Product> list : products.values()) {
+//            for (Product product : list) {
+//                sum += product.getPrice();
+//            }
 //        }
-        for (List<Product> list : products.values()) {
-            for (Product product : list) {
-                sum += product.getPrice();
-            }
-        }
+//
+//        return sum;
 
-        return sum;
+        return products.values().stream().flatMap(Collection::stream).mapToInt(Product::getPrice).sum();
     }
 
     public void print() {
@@ -52,14 +54,14 @@ public class ProductBasket {
 //                System.out.println(products[i]);
 //            }
 
-            for (List<Product> list : products.values()) {
-                for (Product product : list) {
-                    if (product.isSpecial()) {
-                        special += 1;
-                    }
-                    System.out.println(product);
-                }
-            }
+//            for (List<Product> list : products.values()) {
+//                for (Product product : list) {
+//                    if (product.isSpecial()) {
+//                        special += 1;
+//                    }
+//                    System.out.println(product);
+//                }
+//            }
 
 //            for (Product product : products) {
 //                if (product.isSpecial()) {
@@ -68,8 +70,10 @@ public class ProductBasket {
 //                System.out.println(product);
 //            }
 
+            products.values().stream().flatMap(Collection::stream).forEach(System.out::println);
+
             System.out.println("Итого: " + sum());
-            System.out.println("Специальных товаров: " + special);
+            System.out.println("Специальных товаров: " + products.values().stream().flatMap(Collection::stream).filter(Product::isSpecial).count());
         } else {
             System.out.println("В корзине пусто");
         }
@@ -82,20 +86,22 @@ public class ProductBasket {
 //            }
 //        }
 
-        for (List<Product> list : products.values()) {
-            for (Product product : list) {
-                if (product.getName().equals(name)) {
-                    return true;
-                }
-            }
-        }
+//        for (List<Product> list : products.values()) {
+//            for (Product product : list) {
+//                if (product.getName().equals(name)) {
+//                    return true;
+//                }
+//            }
+//        }
+
+        return products.values().stream().flatMap(Collection::stream).anyMatch(product -> product.getName().equals(name));
 //        for (Product product: products) {
 //            if (product.getName().equals(name)) {
 //                return true;
 //            }
 //        }
 
-        return false;
+//        return false;
     }
 
     public void clear() {

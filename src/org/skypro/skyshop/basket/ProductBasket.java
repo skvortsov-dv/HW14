@@ -17,11 +17,13 @@ public class ProductBasket {
     }
 
     public void add(Product product) {
-        if (!products.containsKey(product.getName())){
-            products.put(product.getName(), new ArrayList<>());
-        }
+//        if (!products.containsKey(product.getName())){
+//            products.put(product.getName(), new ArrayList<>());
+//        }
+//
+//        products.get(product.getName()).add(product);
 
-        products.get(product.getName()).add(product);
+        products.computeIfAbsent(product.getName(), k -> new ArrayList<>()).add(product);
     }
 
     public int sum() {
@@ -101,9 +103,15 @@ public class ProductBasket {
     }
 
     public List<Product> remove(String name) {
-        List <Product> deleted = new ArrayList<>();
+//        List <Product> deleted = new ArrayList<>();
 
-        products.remove(name);
+        List <Product> deleted = products.remove(name);
+
+        if (deleted == null) {
+            return new ArrayList<>();
+        } else {
+            return deleted;
+        }
 
 //        Iterator<Product> iterator = products.iterator();
 //
@@ -116,6 +124,6 @@ public class ProductBasket {
 //            }
 //        }
 
-        return deleted;
+//        return deleted;
     }
 }

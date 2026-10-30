@@ -9,7 +9,7 @@ public class SearchableComparator implements Comparator {
         Searchable s2 = (Searchable) o2;
 //        s2 s2 = (s2) o;
 
-        int lengthCompare = Integer.compare(s1.getName().length(), s2.getName().length());
+        int lengthCompare = Integer.compare(s2.getName().length(), s1.getName().length());
 
         if (lengthCompare == 0){
             return s1.getName().compareTo(s2.getName());

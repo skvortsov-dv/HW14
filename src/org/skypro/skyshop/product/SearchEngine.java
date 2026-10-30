@@ -1,6 +1,7 @@
 package org.skypro.skyshop.product;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     private Set<Searchable> searchables;
@@ -19,23 +20,24 @@ public class SearchEngine {
     public Set<Searchable> search (String string) {
 //        Searchable[] answer = new Searchable[5];
 //        List<Searchable> answer = new ArrayList<>();
-        Set<Searchable> answer = new TreeSet<>(new SearchableComparator());
+//        Set<Searchable> answer = new TreeSet<>(new SearchableComparator());
+        return searchables. stream().filter(searchable -> searchable.getStringRepresentation().contains(string)).collect(Collectors.toCollection(() ->  new TreeSet<Searchable>(new SearchableComparator())));
 
-//        for (int i = 0, c = 0; i < index && c < 5; i++) {
-        for (Searchable searchable : searchables) {
-            if (searchable.getStringRepresentation().contains(string)) {
-//                answer[c++] = searchables[i];
-//                if (!answer.containsKey(searchable.getName())) {
-//                    answer.put(searchable.getName(), new ArrayList<>());
-//                }
-
-//                answer.get(searchable.getName()).add(searchable);
-
-                answer.add(searchable);
-            }
-        }
-
-        return answer;
+////        for (int i = 0, c = 0; i < index && c < 5; i++) {
+//        for (Searchable searchable : searchables) {
+//            if (searchable.getStringRepresentation().contains(string)) {
+////                answer[c++] = searchables[i];
+////                if (!answer.containsKey(searchable.getName())) {
+////                    answer.put(searchable.getName(), new ArrayList<>());
+////                }
+//
+////                answer.get(searchable.getName()).add(searchable);
+//
+//                answer.add(searchable);
+//            }
+//        }
+//
+//        return answer;
     }
 
     public Searchable getSearchTerm(String substring) throws BestResultNotFound {
